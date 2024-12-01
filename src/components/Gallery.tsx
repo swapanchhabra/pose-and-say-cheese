@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import './Gallery.css';
@@ -14,6 +14,15 @@ interface GalleryProps {
 }
 
 const Gallery: React.FC<GalleryProps> = ({ photos }) => {
+  const [loaded, setLoaded] = useState<boolean[]>(Array(photos.length).fill(false));
+
+  const handleImageLoad = (index: number) => {
+    console.log(`High-res image ${index + 1} loaded`);
+    const updatedLoaded = [...loaded];
+    updatedLoaded[index] = true;
+    setLoaded(updatedLoaded);
+  };
+
   return (
     <PhotoProvider>
       <div className="gallery">
@@ -21,10 +30,11 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
           <div key={index} className="gallery-item">
             <PhotoView src={photo.src}>
               <img
-                src={photo.lowResSrc || photo.src}
+                src={loaded[index] ? photo.src : photo.lowResSrc}
                 alt={photo.alt}
-                className="gallery-photo"
+                className={`gallery-photo ${loaded[index] ? 'visible' : ''}`}
                 loading="lazy"
+                onLoad={() => handleImageLoad(index)}
               />
             </PhotoView>
           </div>
@@ -33,5 +43,6 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
     </PhotoProvider>
   );
 };
+
 
 export default Gallery;

@@ -2,8 +2,8 @@ import React from 'react';
 import Gallery from '../../components/Gallery';
 
 const Wedding: React.FC = () => {
-  const baseURL = 'https://eclectic-ganache-bc770e.netlify.app/assets/wedding/';
-  const lowResBaseURL = 'https://eclectic-ganache-bc770e.netlify.app/assets/wedding/low-res/';
+  const baseURL = 'https://pose-and-say-cheese-photography.netlify.app/assets/wedding/';
+  const lowResBaseURL = 'https://pose-and-say-cheese-photography.netlify.app/assets/wedding/low-res/';
 
   const weddingPhotos = Array.from({ length: 3 }, (_, i) => ({
     src: `${baseURL}wedding${i + 1}.jpg`,

@@ -1,0 +1,94 @@
+/* Gallery Container */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  padding: 1rem;
+}
+
+/* Placeholder for Lazy Loading */
+.gallery-item {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 75%; /* Aspect ratio of 4:3 */
+  background-color: #e0e0e0; /* Placeholder background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Placeholder Content (Spinner + Camera Icon) */
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0e0e0;
+}
+
+/* Spinner Animation */
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #888;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Camera Icon */
+.camera-icon {
+  position: absolute;
+  font-size: 2.5rem;
+  color: #888;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Lazy Loaded Image (with transitions) */
+.gallery-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures images fill the container proportionally */
+  opacity: 0; /* Hidden initially */
+  filter: blur(5px); /* Blurred initially */
+  transition: opacity 0.5s ease-in-out, filter 0.5s ease-in-out; /* Smooth transition */
+}
+
+/* Fully Loaded Image */
+.gallery-photo.visible {
+  opacity: 1; /* Fully visible */
+  filter: blur(0); /* No blur */
+}
+
+/* Hidden Image Placeholder */
+.gallery-photo.hidden {
+  opacity: 0;
+  filter: blur(5px); /* Blurred until loaded */
+}

@@ -17,7 +17,6 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
   const [loaded, setLoaded] = useState<boolean[]>(Array(photos.length).fill(false));
 
   const handleImageLoad = (index: number) => {
-    console.log(`High-res image ${index + 1} loaded`);
     const updatedLoaded = [...loaded];
     updatedLoaded[index] = true;
     setLoaded(updatedLoaded);
@@ -43,6 +42,5 @@ const Gallery: React.FC<GalleryProps> = ({ photos }) => {
     </PhotoProvider>
   );
 };
-
 
 export default Gallery;

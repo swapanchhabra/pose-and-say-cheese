@@ -1,94 +1,87 @@
 /* Gallery Container */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-auto-rows: 150px;
   gap: 10px;
   padding: 1rem;
 }
 
-/* Placeholder for Lazy Loading */
+/* Gallery Item Styling */
 .gallery-item {
   position: relative;
-  width: 100%;
-  height: 0;
-  padding-top: 75%; /* Aspect ratio of 4:3 */
-  background-color: #e0e0e0; /* Placeholder background color */
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
-}
-
-/* Placeholder Content (Spinner + Camera Icon) */
-.placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #e0e0e0;
-}
-
-/* Spinner Animation */
-.spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #888;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Camera Icon */
-.camera-icon {
-  position: absolute;
-  font-size: 2.5rem;
-  color: #888;
-  animation: blink 1.5s infinite;
-}
-
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-/* Lazy Loaded Image (with transitions) */
-.gallery-photo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures images fill the container proportionally */
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
   opacity: 0; /* Hidden initially */
-  filter: blur(5px); /* Blurred initially */
-  transition: opacity 0.5s ease-in-out, filter 0.5s ease-in-out; /* Smooth transition */
+  animation: fadeIn 1s ease forwards;
 }
 
-/* Fully Loaded Image */
-.gallery-photo.visible {
-  opacity: 1; /* Fully visible */
-  filter: blur(0); /* No blur */
+.gallery-item.loaded {
+  opacity: 1; /* Fade in when loaded */
 }
 
-/* Hidden Image Placeholder */
-.gallery-photo.hidden {
+.gallery-item:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Gallery Photo Styling */
+.gallery-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover .gallery-photo {
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Captions on Hover */
+.gallery-item::after {
+  content: attr(data-caption); /* Use alt or custom caption */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 14px;
+  padding: 10px;
   opacity: 0;
-  filter: blur(5px); /* Blurred until loaded */
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-item:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr; /* Single column for small screens */
+  }
 }

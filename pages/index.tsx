@@ -5,32 +5,32 @@ import Slider from 'react-slick';
 const Home: React.FC = () => {
   const portfolioItems = [
     {
-      image: 'https://pose-and-say-cheese-photography.netlify.app/carousel/wedding1.jpg',
+      image: 'https://pose-and-say-cheese-photography.netlify.app/assets/carousel/wedding1.jpg',
       title: 'Wedding Photography',
       link: '/portfolio/weddings',
     },
     {
-      image: 'https://pose-and-say-cheese-photography.netlify.app/carousel/business1.jpg',
+      image: 'https://pose-and-say-cheese-photography.netlify.app/assets/carousel/business1.jpg',
       title: 'Business Portraits',
       link: '/portfolio/business-portraits',
     },
     {
-      image: 'https://pose-and-say-cheese-photography.netlify.app/carousel/newborn1.jpg',
+      image: 'https://pose-and-say-cheese-photography.netlify.app/assets/carousel/newborn1.jpg',
       title: 'Newborn Photography',
       link: '/portfolio/new-born',
     },
     {
-      image: 'https://pose-and-say-cheese-photography.netlify.app/carousel/pregnancy1.jpg',
+      image: 'https://pose-and-say-cheese-photography.netlify.app/assets/carousel/pregnancy1.jpg',
       title: 'Pregnancy Photography',
       link: '/portfolio/pregnancy',
     },
     {
-      image: 'https://pose-and-say-cheese-photography.netlify.app/carousel/family1.jpg',
+      image: 'https://pose-and-say-cheese-photography.netlify.app/assets/carousel/family1.jpg',
       title: 'Family Portraits',
       link: '/portfolio/family-portraits',
     },
     {
-      image: 'https://pose-and-say-cheese-photography.netlify.app/carousel/fashion1.jpg',
+      image: 'https://pose-and-say-cheese-photography.netlify.app/assets/carousel/fashion1.jpg',
       title: 'Fashion Photography',
       link: '/portfolio/fashion-portraits',
     },

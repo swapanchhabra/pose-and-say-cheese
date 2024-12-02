@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
       {/* Logo or Branding */}
       <h1 className="text-2xl font-bold font-poppins mt-5 ml-20">
         <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          Pose & Say Cheese
+          Pose & Say Cheese Photography
         </Link>
       </h1>
 

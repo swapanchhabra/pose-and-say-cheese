@@ -1,6 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 
 const Contact: React.FC = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        'service_94ojmtg', // Replace with your EmailJS service ID
+        'template_0aw450v', // Replace with your EmailJS template ID
+        e.currentTarget,
+        'a80r_1NesFD4wskg7' // Replace with your EmailJS public key
+      )
+      .then(
+        () => {
+          setIsSubmitted(true);
+          setIsError(false);
+        },
+        () => {
+          setIsSubmitted(false);
+          setIsError(true);
+        }
+      );
+
+    // Reset the form fields
+    e.currentTarget.reset();
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6 py-12">
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -19,15 +48,16 @@ const Contact: React.FC = () => {
         {/* Right Column - Contact Form */}
         <div className="bg-white p-8 shadow-lg rounded-lg">
           <h1 className="text-3xl font-bold mb-6 text-gray-800">Get in Touch</h1>
-          <form
-            action="#"
-            method="POST"
-            className="space-y-6"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert('Your message has been sent!');
-            }}
-          >
+
+          {/* Success/Error Messages */}
+          {isSubmitted && (
+            <p className="text-green-600 text-center mb-4">Your message has been sent successfully!</p>
+          )}
+          {isError && (
+            <p className="text-red-600 text-center mb-4">Something went wrong. Please try again.</p>
+          )}
+
+          <form onSubmit={sendEmail} className="space-y-6">
             {/* Name */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">

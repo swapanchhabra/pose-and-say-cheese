@@ -35,7 +35,6 @@ const Home: React.FC = () => {
       link: '/portfolio/fashion-portraits',
     },
   ];
-  
 
   const settings = {
     dots: true,
@@ -49,33 +48,23 @@ const Home: React.FC = () => {
   };
 
   return (
-    <main className="px-4 text-center">
-      {/* Title with Link */}
-      <h1 className="text-3xl font-bold mb-6">
-        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          Pose and Say Cheese!
-        </Link>
-      </h1>
-
-      <p className="mb-6">Your one-stop solution for professional photography services.</p>
-
+    <main>
       {/* Carousel Section */}
-      <section className="mb-8">
-        <Slider {...settings}>
+      <section className="relative">
+        <Slider {...settings} className="carousel">
           {portfolioItems.map((item, index) => (
             <div key={index} className="relative">
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-auto rounded-lg"
+                className="w-full h-screen object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col items-center justify-center">
-                <h2 className="text-white text-xl font-semibold mb-4">{item.title}</h2>
+              <div className="absolute inset-0 flex flex-col justify-end items-start p-6">
                 <Link
                   href={item.link}
-                  className="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+                  className="text-white border border-white px-6 py-3 rounded-lg hover:bg-white hover:text-black transition-all mb-6 ml-20"
                 >
-                  View Portfolio
+                  {item.title}
                 </Link>
               </div>
             </div>
@@ -83,8 +72,8 @@ const Home: React.FC = () => {
         </Slider>
       </section>
 
-      {/* Our Services Section */}
-      <section style={{ marginTop: '40px' }}>
+      {/* Other Sections */}
+      <section style={{ marginTop: '40px', padding: '20px', textAlign: 'center' }}>
         <h2 className="text-2xl font-bold mb-4">Our Services</h2>
         <p>We specialize in capturing timeless moments across a variety of genres:</p>
         <ul className="list-none p-0 mt-4">
@@ -97,12 +86,11 @@ const Home: React.FC = () => {
         </ul>
       </section>
 
-      {/* Explore Our Work Section */}
-      <section style={{ marginTop: '40px' }}>
+      <section style={{ marginTop: '40px', padding: '20px', textAlign: 'center' }}>
         <h2 className="text-2xl font-bold mb-4">Explore Our Work</h2>
         <p>
           Check out our{' '}
-          <Link href="/portfolio" style={{ color: '#0070f3' }}>
+          <Link href="/portfolio" className="text-blue-500 hover:underline">
             portfolio
           </Link>{' '}
           to see our latest projects.

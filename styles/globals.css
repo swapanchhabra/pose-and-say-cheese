@@ -1,3 +1,7 @@
+/* Add this in your globals.css */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 /* Reset and Basic Styling */
 html, body {
   margin: 0;
@@ -27,3 +31,6 @@ code {
 
 /* Tailwind CSS utility styles */
 @tailwind utilities;
+
+
+

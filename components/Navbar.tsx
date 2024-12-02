@@ -1,16 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const Navbar: React.FC = () => {
   const [showPortfolioDropdown, setShowPortfolioDropdown] = useState(false);
 
+  const toggleDropdown = () => {
+    setShowPortfolioDropdown((prev) => !prev);
+  };
+
+  const closeDropdown = () => {
+    setShowPortfolioDropdown(false);
+  };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (!(event.target as HTMLElement).closest('.dropdown-wrapper')) {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
   return (
     <nav className="bg-gray-800 text-white px-6 py-4 flex justify-between items-center">
       <h1 className="text-xl font-bold">
         <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-        Pose and Say Cheese
+          Pose and Say Cheese
         </Link>
-        </h1>
+      </h1>
       <ul className="flex space-x-6">
         <li>
           <a href="/" className="hover:text-gray-300">
@@ -27,33 +49,36 @@ const Navbar: React.FC = () => {
             Pricing
           </a>
         </li>
-        <li
-          className="relative"
-          onMouseEnter={() => setShowPortfolioDropdown(true)}
-          onMouseLeave={() => setShowPortfolioDropdown(false)}
-        >
-          <a href="/portfolio" className="hover:text-gray-300">
+        <li className="relative dropdown-wrapper">
+          <button
+            onClick={toggleDropdown}
+            className="hover:text-gray-300 focus:outline-none"
+          >
             Portfolio
-          </a>
+          </button>
           {showPortfolioDropdown && (
-            <ul className="absolute bg-white text-gray-800 shadow-lg mt-2 rounded w-48">
+            <ul
+              className="absolute bg-white text-gray-800 shadow-lg mt-2 rounded w-48"
+              onMouseEnter={() => setShowPortfolioDropdown(true)}
+              onMouseLeave={() => setShowPortfolioDropdown(false)}
+            >
               <li className="hover:bg-gray-100 px-4 py-2">
-                <a href="/portfolio/weddings">Weddings</a>
+                <Link href="/portfolio/weddings">Weddings</Link>
               </li>
               <li className="hover:bg-gray-100 px-4 py-2">
-                <a href="/portfolio/business-portraits">Business Portraits</a>
+                <Link href="/portfolio/business-portraits">Business Portraits</Link>
               </li>
               <li className="hover:bg-gray-100 px-4 py-2">
-                <a href="/portfolio/new-born">New Born</a>
+                <Link href="/portfolio/new-born">New Born</Link>
               </li>
               <li className="hover:bg-gray-100 px-4 py-2">
-                <a href="/portfolio/pregnancy">Pregnancy</a>
+                <Link href="/portfolio/pregnancy">Pregnancy</Link>
               </li>
               <li className="hover:bg-gray-100 px-4 py-2">
-                <a href="/portfolio/family-portraits">Family Portraits</a>
+                <Link href="/portfolio/family-portraits">Family Portraits</Link>
               </li>
               <li className="hover:bg-gray-100 px-4 py-2">
-                <a href="/portfolio/fashion-portraits">Fashion Portraits</a>
+                <Link href="/portfolio/fashion-portraits">Fashion Portraits</Link>
               </li>
             </ul>
           )}
